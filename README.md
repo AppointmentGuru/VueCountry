@@ -2,6 +2,12 @@
 
 > A collection of useful country data and some filters which you can run over it
 
+**Dependencies:**
+
+* vuex
+* moment-timezone
+* flag-icon-css
+
 ##Basic usage
 
 **Install:**
@@ -55,3 +61,34 @@ export default {
   ...
 }
 ```
+
+
+## Development
+
+# countries
+
+> A Vuex store and some components for getting useful info about a country
+
+## Build Setup
+
+``` bash
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
+
+# run unit tests
+npm run unit
+
+# run e2e tests
+npm run e2e
+
+# run all tests
+npm test
+```
+
+For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
