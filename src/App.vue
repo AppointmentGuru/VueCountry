@@ -1,92 +1,36 @@
 <template>
   <div id="app">
-    <h3>Vue Country Store</h3>
-    <p>A collection of useful country data and some filters which you can run over it</p>
-
-    <h4>Basic usage</h4>
-
-    <strong>Install:</strong>
-
-    <pre><code>
-npm install git+https://git@github.com/AppointmentGuru/VueCountry.git
-    </code></pre>
-
-    <h5>Use:</h5>
-
-    <strong>Use directly as a store</strong>
-    <pre><code>
-import countrystore from 'countries/src/countrystore'
-    </code></pre>
-
-    <strong>Use as a module in your existing vuex store</strong>
-    <pre><code>
-// in store/index.js:
-var Vue = require('vue')
-var Vuex = require('vuex')
-Vue.use(Vuex)
-
-import countries from 'countries/src/countrystore/modules/countries'
-
-export default new Vuex.Store({
-  modules: {
-    // ...
-    countries: countries
-  }
-})
-    </code></pre>
-
-    <h5>filters:</h5>
-    <p>
-    The library provides some filters via a mixin:
-    <ul>
-      <li>getCountry(isoCode)</li>
-      <li>getCountryByTimeZone(timezone)</li>
-    </ul>
-    </p>
-
-    <pre><code>
-import countryfilters from 'countries/src/mixins/countryfilters'
-
-// provide these as a mixin for your component:
-export default {
-  name: 'myCoolComponent',
-  countrystore,
-  mixins: [countryfilters],
-  ...
-}
-    </code></pre>
-
-    <h4>Demo</h4>
-    <strong><pre>getCountry({{iso}})<pre></strong>
-    <p>
-      <input v-model='iso' >
-      <p>Current iso: <span class="flag-icon" :class=' "flag-icon-"+iso '></span> {{iso}}</p>
-      Country info:
-      <pre><code>{{getCountry(iso)}}</code></pre>
-    </p>
-
-    <strong><pre>getCountryByTimeZone({{iso}})<pre></strong>
-    <p>
-      <input v-model='tz' >
-      <p>Current tz: {{tz}}</p>
-      Returns:
-      <pre><code>{{getCountryByTimezone(tz)}}</code></pre>
-    </p>
-
-    <h4>Raw data</h4>
-    <pre><code>{{data}}</code></pre>
+    <el-row :span="12">
+    <toolbar :iso='iso' ></toolbar>
+    </el-row>
+    <el-row>
+      <el-col :span="8">
+        <side-bar></side-bar>
+      </el-col>
+      <el-col :span="12">
+        <div class='main-content' >
+          <docs></docs>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
+import SideBar from './components/SideBar'
+import Toolbar from './components/Toolbar'
+import Docs from './components/pages/Docs'
+
 require('flag-icon-css/css/flag-icon.min.css')
 
 import countrystore from './countrystore'
 import countryfilters from './mixins/countryfilters'
+
 export default {
   name: 'app',
   countrystore,
   mixins: [countryfilters],
+  components: { SideBar, Toolbar, Docs },
   data () {
     return {
       iso: 'za',
@@ -100,36 +44,12 @@ export default {
   }
 }
 </script>
-
 <style>
+body{ padding:0px;margin:0px; }
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin-top: 60px;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 }
- pre {
-    text-align: left;
-    font-family: "Courier 10 Pitch", Courier, monospace;
-    font-size: 95%;
-    line-height: 140%;
-    white-space: pre;
-    white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    white-space: -o-pre-wrap;
+.main-content {
+  padding: 20px;
 }
-
-code {
-    font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
-    font-size: 95%;
-    line-height: 140%;
-    white-space: pre;
-    white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    white-space: -o-pre-wrap;
-    background: #faf8f0;
-    display:block;
-}
-
 </style>
