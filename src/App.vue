@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <el-row :span="12">
-    <toolbar></toolbar>
+    <toolbar :iso='iso' ></toolbar>
     </el-row>
     <el-row>
       <el-col :span="8">

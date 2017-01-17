@@ -1,6 +1,9 @@
 <template>
 <el-menu theme="light" default-active="1" class="el-menu-demo" mode="horizontal" >
-  <el-menu-item index="1">VueCountry</el-menu-item>
+  <el-menu-item index="1">
+    <span class="flag-icon" :class=' "flag-icon-"+iso '></span>
+    VueCountry
+  </el-menu-item>
   <!--
   <el-submenu index="2">
     <template slot="title">Workspace</template>
@@ -14,3 +17,11 @@
   -->
 </el-menu>
 </template>
+<script>
+export default {
+  name: 'Toolbar',
+  props: {
+    iso: { type: String, default: 'za' }
+  }
+}
+</script>
